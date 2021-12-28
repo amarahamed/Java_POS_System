@@ -12,11 +12,10 @@ import java.time.LocalDate;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        User user = new User(123456, "amar@gmail.com", "amar", "1234567890", LocalDate.now());
-        System.out.println(user.getPhone());
+        User user = new User(123456, "amar@gmail.com", "amar", "1234567890", LocalDate.of(2002,06,15));
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Number Analysis");
+        stage.setTitle("Dashboard");
         stage.setScene(scene);
         stage.show();
     }

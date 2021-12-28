@@ -1,9 +1,7 @@
 package com.amar.pos_system.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.Period;
 
 public class User {
     private int userId;
@@ -82,17 +80,13 @@ public class User {
         return phone;
     }
 
-    public static String getStringWithOnlyDigits(String word) {
-
-        return
-    }
-
     public void setPhone(String phone) {
         phone = phone.trim();
         // use regex
         if(phone.matches("[0-9]{10}")) {
-            System.out.println("Valid phone number");
             this.phone = phone;
+        } else {
+            throw new IllegalArgumentException("Phone number should only contain digits 0 - 9 and should contain 10 digits");
         }
     }
 
@@ -101,6 +95,13 @@ public class User {
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        if(dateOfBirth.isAfter(LocalDate.now())) {
+           throw new IllegalArgumentException("Date of birth cannot be in the future");
+        }
+        else if(Period.between(dateOfBirth, LocalDate.now()).getYears() < 16) {
+            throw new IllegalArgumentException("Person should be at least 16 years of age");
+        } else {
+            this.dateOfBirth = dateOfBirth;
+        }
     }
 }
