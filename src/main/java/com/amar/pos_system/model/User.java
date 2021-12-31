@@ -2,18 +2,23 @@ package com.amar.pos_system.model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class User {
     private int userId;
     private String email, name, phone;
     private LocalDate dateOfBirth;
+    private String userRole;
 
-    public User(int userId, String email, String name, String phone, LocalDate dateOfBirth) {
+    public User(int userId, String email, String name, String phone, LocalDate dateOfBirth, String userRole) {
         setUserId(userId);
         setEmail(email);
         setName(name);
         setPhone(phone);
         setDateOfBirth(dateOfBirth);
+        setUserRole(userRole);
     }
 
     public int getUserId() {
@@ -102,6 +107,23 @@ public class User {
             throw new IllegalArgumentException("Person should be at least 16 years of age");
         } else {
             this.dateOfBirth = dateOfBirth;
+        }
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public static List<String> getAllRoles() {
+        return Arrays.asList("cashier", "admin", "customer");
+    }
+
+    public void setUserRole(String userRole) {
+        userRole = userRole.trim().toLowerCase();
+        if(getAllRoles().contains(userRole)) {
+            this.userRole = userRole;
+        } else {
+            throw new IllegalArgumentException("Role should be selected from the list: " + getAllRoles());
         }
     }
 }
