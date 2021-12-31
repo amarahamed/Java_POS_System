@@ -1,6 +1,7 @@
 package com.amar.pos_system;
 
 import com.amar.pos_system.model.User;
+import com.amar.pos_system.utilities.POS_Encryption;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +13,9 @@ import java.time.LocalDate;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        User user = new User(123456, "amar@gmail.com", "amar", "1234567890", LocalDate.of(2002,06,15));
+        POS_Encryption encryption = new POS_Encryption();
+        System.out.println(encryption.encryptString("AA"));
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Dashboard");
